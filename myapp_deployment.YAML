@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: docker.io/r647/amt-repo:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "1000m"
+            requests:
+              cpu: "600m"
+      imagePullSecrets:
+        - name: regcred
